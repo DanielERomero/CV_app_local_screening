@@ -1,0 +1,29 @@
+# Variables de entorno
+.env
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.mypy_cache/
+.pytest_cache/
+
+# Entornos Virtuales
+.venv/
+venv/
+ENV/
+env/
+
+# Archivos de CVs y PDFs
+*.pdf
+cvs/
+temp_cvs/
+
+# Resultados de tests en JSON
+test_*_resultado_*.json
+*resultado*.json
+
+# SO
+.DS_Store
+Thumbs.db
