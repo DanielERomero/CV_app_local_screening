@@ -242,6 +242,7 @@ CANDIDATO (datos estructurados):
 
 JSON:"""
 
+PROMPT_VERSION = "v1.0"
 
 # ============================================================
 # SESSION STATE
@@ -547,6 +548,8 @@ with tab3:
                     "habilidades_faltantes": resultado.get("habilidades_faltantes", ""),
                     "justificacion": resultado.get("justificacion", ""),
                     "tiempo": tiempo,
+                    "modelo": modelo_llm,
+                    "prompt_version": PROMPT_VERSION,
                     "datos_cv": cand["datos"],
                 }
 
@@ -556,7 +559,7 @@ with tab3:
                     try:
                         guardar_gold_evaluacion(
                             db, cand["silver_id"], jd["silver_id"],
-                            resultado, modelo_llm, tiempo
+                            resultado, modelo_llm, tiempo, PROMPT_VERSION
                         )
                     except Exception as e:
                         st.warning(f"⚠️ Supabase gold: {e}")
@@ -619,7 +622,11 @@ with tab4:
                     st.markdown(f"**📝 Justificación del puntaje:**")
                     st.write(ev["justificacion"])
 
-                    st.caption(f"⏱️ {ev['tiempo']}s")
+                    st.caption(
+                        f"⏱️ {ev['tiempo']}s  |  "
+                        f"🤖 {ev.get('modelo', 'N/A')}  |  "
+                        f"📝 prompt {ev.get('prompt_version', 'N/A')}"
+                    )
 
         # Detalle expandible
         st.divider()
@@ -664,6 +671,8 @@ with tab4:
                 "motivos_contratacion": ev["motivos_contratacion"],
                 "habilidades_faltantes": ev["habilidades_faltantes"],
                 "justificacion": ev["justificacion"],
+                "modelo": ev.get("modelo", ""),
+                "prompt_version": ev.get("prompt_version", ""),
             })
 
         st.download_button(

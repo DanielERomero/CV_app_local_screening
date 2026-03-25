@@ -137,7 +137,8 @@ def guardar_silver_jd(db: SupabaseClient, bronze_id: str,
 
 def guardar_gold_evaluacion(db: SupabaseClient, candidato_id: str,
                              job_id: str, resultado_eval: dict,
-                             modelo: str, tiempo: float) -> str:
+                             modelo: str, tiempo: float,
+                             prompt_version: str) -> str:
     resultado = db.insertar("gold_evaluaciones", {
         "candidato_id": candidato_id,
         "job_id": job_id,
@@ -149,6 +150,7 @@ def guardar_gold_evaluacion(db: SupabaseClient, candidato_id: str,
         "respuesta_llm": resultado_eval,
         "modelo_eval": modelo,
         "tiempo_eval": tiempo,
+        "prompt_version": prompt_version,
     })
     return resultado[0]["id"]
 

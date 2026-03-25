@@ -24,6 +24,9 @@ temp_cvs/
 test_*_resultado_*.json
 *resultado*.json
 
+# Claude Code
+CLAUDE.md
+
 # SO
 .DS_Store
 Thumbs.db
